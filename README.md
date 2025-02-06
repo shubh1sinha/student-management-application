@@ -10,8 +10,8 @@ student-management-application/
 │   ├── main/
 │   │   ├── java/
 │   │   │   ├── com/
-│   │   │   │   └── example/
-│   │   │   │       └── student/
+│   │   │   │   └── assignment/
+│   │   │   │       └── management/
 │   │   │   │           ├── controller/       # REST API Controllers
 │   │   │   │           ├── model/            # Entity classes (e.g., Student)
 │   │   │   │           ├── repository/       # Repository interfaces (CRUD operations)
@@ -55,3 +55,9 @@ The stack used includes:
 - **PostgreSQL** for database.
 - **Maven** for dependency management.
 - **Lombok** for reducing boilerplate code.
+
+Mutation Api(s) Input Mapping
+-Generic Structure: Using a generic class like APIRequest<T> means that the request class can be reused for multiple types of data (StudentDTO, TeacherDTO, etc.), making the code more modular and maintainable.
+-Flexibility: The APIRequest<T> can easily be extended for other types of requests beyond just SaveStudentRequest, making it easy to manage different entities within the system.
+-Clean API Requests: By encapsulating the request logic in classes like APIRequest, the API layer remains clean, separating the concerns of request structure and actual business logic.
+-Jackson Annotations: The annotations help with handling JSON serialization/deserialization, making it easier to convert between Java objects and JSON, and also handle situations where the request JSON may contain unknown or null values.

@@ -1,2 +1,52 @@
 # student-management-application
 CRUD Operation using Java 21
+-----
+Db Script(PostgreSql)
+CREATE SCHEMA IF NOT EXISTS student;
+
+CREATE TABLE IF NOT EXISTS student.student_tbl (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    class INT NOT NULL,
+    contact VARCHAR(10) NOT NULL,
+    age INT NOT NULL,
+    UNIQUE (name, age, contact)
+);
+
+-- Create an index on the 'name' column for faster search operations
+CREATE INDEX idx_student_name ON student.student_tbl (name);
+
+-- Create an index on the 'age' column for faster search operations
+CREATE INDEX idx_student_age ON student.student_tbl (age);
+
+-- Create an index on the 'contact' column for faster search operations
+CREATE INDEX idx_student_contact ON student.student_tbl (contact);
+
+CREATE OR REPLACE FUNCTION check_age_greater_than_six()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.age < 6 THEN
+        RAISE EXCEPTION 'Age must be greater than 5. Provided age: %', NEW.age;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER age_check_before_insert_update
+BEFORE INSERT OR UPDATE ON student.student_tbl
+FOR EACH ROW EXECUTE FUNCTION check_age_greater_than_six();
+
+
+INSERT INTO student.student_tbl (name, class, contact, age) VALUES
+('Alice Johnson', 5, '1234567890', 10),
+('Bob Smith', 6, '2345678901', 12),
+('Charlie Brown', 7, '3456789012', 14),
+('David Wilson', 8, '4567890123', 15),
+('Eve Davis', 9, '5678901234', 11);
+
+   ALTER TABLE student.student_tbl
+   ALTER COLUMN usid SET NOT NULL;
+
+
+select * from student.student_tbl;
+---------------

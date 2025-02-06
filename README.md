@@ -15,15 +15,10 @@ student-management-application/
 │   │   │   │           ├── controller/       # REST API Controllers
 │   │   │   │           ├── model/            # Entity classes (e.g., Student)
 │   │   │   │           ├── repository/       # Repository interfaces (CRUD operations)
-│   │   │   │           └── service/          # Service layer (business logic)
+│   │   │   │           └── service/			# Service layer (business logic)
+│   │   │   │           └── utility/          #utility layer
+│   │   │   │           └── exception/        #global exception handler
 │   │   └── resources/               # Configuration files (application.properties, etc.)
-│   ├── test/                       # Unit and integration tests
-│   │   └── java/
-│   │       ├── com/
-│   │       │   └── example/
-│   │       │       └── student/
-│   │       │           ├── controller/       # Test cases for controllers
-│   │       │           └── service/          # Test cases for services
 │
 ├── .gitignore                      # Specifies files and directories to be ignored by Git
 ├── .gitattributes                  # Git attributes file
